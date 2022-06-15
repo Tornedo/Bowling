@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fragmentScorecardTextView"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:text="@string/Scoreboard"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentScorecardRecyclerView"
+        android:background="@drawable/background_colorless_bordered"
+        tools:listitem="@layout/scorecard_list_item"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragmentScorecardResetButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/Widget.MaterialComponents.Button"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:text="@string/reset" />
+</LinearLayout>

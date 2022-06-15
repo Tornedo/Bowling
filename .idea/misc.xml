@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/background_colorless_bordered.xml" value="0.152" />
+        <entry key="app/src/main/res/drawable-v24/background_spare.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/background_strike.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_bowling.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_bowling_pin.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_dashboard_black_24dp.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_home_black_24dp.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_notifications_black_24dp.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_score.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable-v24/ic_timeline.xml" value="0.131" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.131" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1752786220871327" />
+        <entry key="app/src/main/res/layout/dialog_pin_input.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_current_frame.xml" value="0.2971014492753623" />
+        <entry key="app/src/main/res/layout/fragment_scorecard.xml" value="0.2971014492753623" />
+        <entry key="app/src/main/res/layout/scorecard_list_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/view_scorecard_list_item.xml" value="0.14412360688956433" />
+        <entry key="app/src/main/res/menu/navigation.xml" value="0.325" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.315" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.315" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

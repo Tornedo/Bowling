@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.ScoreBoardFragment">
+
+    <TextView
+        android:id="@+id/fragmentCurrentPinsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/frame_current"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/fragmentCurrentPinsNextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="24dp"
+        android:background="@color/white"
+        android:text="@string/next_bowl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentCurrentFramePinsToKnockDownInputLayout"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentCurrentFramePinsToKnockDownInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_colorless_bordered"
+        android:hint="@string/pins_to_knock_down"
+        android:padding="8dp"
+        app:boxBackgroundColor="@color/colorTransparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragmentCurrentPinsTitle"
+        app:layout_constraintVertical_bias=".1"
+        tools:layout_editor_absoluteX="16dp">
+
+        <EditText
+            android:id="@+id/fragmentCurrentFramePinsToKnockDownEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
