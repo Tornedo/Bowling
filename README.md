@@ -6,7 +6,7 @@ An Android Application that calculate the bowling score
 
 ## App Features 
 (https://user-images.githubusercontent.com/7686968/173893219-69b2de2d-d358-46e2-9b3b-9fcfe45cc2f8.png)
-(https://user-images.githubusercontent.com/7686968/173893432-fe8f1421-34c9-4e0d-91cd-cd7cbba0311d.png)
+![Screen Shot 2022-06-15 at 7 39 58 PM](https://user-images.githubusercontent.com/7686968/173893432-fe8f1421-34c9-4e0d-91cd-cd7cbba0311d.png)
 
 
 
