@@ -11,24 +11,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var currentSelectedTabId: Int? = null
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.current_game -> {
-                if (currentSelectedTabId == R.id.current_game) return@OnNavigationItemSelectedListener true
-                inflateFragment(OngoingGameFragment.newInstance())
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.current_score -> {
-                if (currentSelectedTabId == R.id.current_score) return@OnNavigationItemSelectedListener true
-                inflateFragment(ScoreBoardFragment.newInstance())
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
     private fun inflateFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -40,7 +22,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottom_navigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.current_game -> {
+                    inflateFragment(OngoingGameFragment.newInstance())
+                }
+                R.id.current_score-> {
+                    inflateFragment(ScoreBoardFragment.newInstance())
+                }
+            }
+            return@setOnItemSelectedListener true
+        }
         inflateFragment(OngoingGameFragment.newInstance())
         bottom_navigation.selectedItemId = R.id.current_game
 
