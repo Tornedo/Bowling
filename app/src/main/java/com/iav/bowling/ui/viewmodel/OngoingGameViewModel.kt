@@ -43,6 +43,7 @@ class OngoingGameViewModel : ViewModel() {
         if (currentFrameInPlay + 1 == 11) {
             gameOver.value = true
         }
+
         scorecard.value!!.inPlayLiveData.value = currentFrameInPlay + 1
         remainingPinsInFrame.value = 10
         ballRollsInFrame = 0

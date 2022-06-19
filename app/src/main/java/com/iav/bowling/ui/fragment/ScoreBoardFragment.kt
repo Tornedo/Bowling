@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
-import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import com.iav.bowling.R
 import com.iav.bowling.ui.adapter.FrameAdapter
+import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import kotlinx.android.synthetic.main.fragment_scoreboard.*
 
 class ScoreBoardFragment : Fragment() {
@@ -26,8 +26,8 @@ class ScoreBoardFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_scoreboard, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(OngoingGameViewModel::class.java)
         setupList()
         setDataObservers()

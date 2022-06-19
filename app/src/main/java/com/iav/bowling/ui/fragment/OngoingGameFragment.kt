@@ -9,13 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import com.iav.bowling.R
+import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import kotlinx.android.synthetic.main.fragment_ongoing_game.*
 
-class OngoingGameFragment : Fragment() {
+class OngoingGameFragment : Fragment() , LifecycleObserver {
 
     private lateinit var viewModel: OngoingGameViewModel
 
@@ -26,8 +27,8 @@ class OngoingGameFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_ongoing_game, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(OngoingGameViewModel::class.java)
 
         fragmentCurrentPinsNextButton.setOnClickListener {
