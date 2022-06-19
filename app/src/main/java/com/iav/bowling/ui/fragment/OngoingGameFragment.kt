@@ -9,16 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.iav.bowling.R
 import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import kotlinx.android.synthetic.main.fragment_ongoing_game.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OngoingGameFragment : Fragment() , LifecycleObserver {
+class OngoingGameFragment : Fragment() {
 
-    private lateinit var viewModel: OngoingGameViewModel
+    // Lazy injected MainViewModel
+    private val viewModel: OngoingGameViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,6 @@ class OngoingGameFragment : Fragment() , LifecycleObserver {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(OngoingGameViewModel::class.java)
 
         fragmentCurrentPinsNextButton.setOnClickListener {
             validateAndPassInput()
@@ -39,7 +38,13 @@ class OngoingGameFragment : Fragment() , LifecycleObserver {
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     fragmentCurrentFramePinsToKnockDownInputLayout.error = null
@@ -61,21 +66,22 @@ class OngoingGameFragment : Fragment() , LifecycleObserver {
     @SuppressLint("SetTextI18n")
     private fun setDataListeners() {
         viewModel.frameInPlay.observe(viewLifecycleOwner, Observer {
-            fragmentCurrentPinsTitle.text = "${requireContext().getText(R.string.frame_current)} : $it"
+            fragmentCurrentPinsTitle.text =
+                "${requireContext().getText(R.string.frame_current)} : $it"
         })
         viewModel.gameOver.observe(viewLifecycleOwner, Observer {
-            if(it == true) fragmentCurrentPinsTitle.text = "Game Over"
+            if (it == true) fragmentCurrentPinsTitle.text = "Game Over"
         })
     }
 
     private fun validateAndPassInput() {
         fragmentCurrentFramePinsToKnockDownEditText.text.toString().apply {
-            if(isValidNumber(this)) {
+            if (isValidNumber(this)) {
                 viewModel.doKnockDownPins(this.toInt())
                 fragmentCurrentFramePinsToKnockDownEditText.setText("")
-            }
-            else {
-                fragmentCurrentFramePinsToKnockDownInputLayout.error = "Please input a valid number of Pins!"
+            } else {
+                fragmentCurrentFramePinsToKnockDownInputLayout.error =
+                    "Please input a valid number of Pins!"
             }
         }
     }

@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
 import com.iav.bowling.model.ScoreBoard
+import org.koin.core.KoinComponent
 
-class OngoingGameViewModel : ViewModel() {
+class OngoingGameViewModel : ViewModel() , KoinComponent {
 
     val scorecard = MutableLiveData<ScoreBoard>()
     var remainingPinsInFrame = MutableLiveData<Int>()

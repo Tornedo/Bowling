@@ -76,10 +76,21 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:4.1.0'
     testImplementation 'android.arch.core:core-testing:1.1.1'
 
-
     // Espresso
     def androidx_test_espresso = "3.1.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidx_test_espresso"
     implementation "androidx.test.espresso:espresso-idling-resource:$androidx_test_espresso"
+
+    //Depdencency Injection Koin
+    implementation "org.koin:koin-core:2.1.5"
+    implementation "org.koin:koin-android:2.1.5"
+    implementation "org.koin:koin-androidx-scope:2.1.5"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.5"
+    implementation "org.koin:koin-androidx-fragment:2.1.4"
+    implementation "org.koin:koin-test:2.1.4"
+    // Koin testing tools
+    testImplementation "io.insert-koin:koin-test:3.2.0"
+    // Needed JUnit version
+    testImplementation "io.insert-koin:koin-test-junit4:3.2.0"
 }

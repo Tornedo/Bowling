@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.iav.bowling.R
 import com.iav.bowling.ui.adapter.FrameAdapter
 import com.iav.bowling.ui.viewmodel.OngoingGameViewModel
 import kotlinx.android.synthetic.main.fragment_scoreboard.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScoreBoardFragment : Fragment() {
 
-    private lateinit var viewModel: OngoingGameViewModel
+    // Lazy injected MainViewModel
+    private val viewModel: OngoingGameViewModel by viewModel()
     private lateinit var adapter: FrameAdapter
 
     override fun onCreateView(
@@ -28,7 +29,6 @@ class ScoreBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(OngoingGameViewModel::class.java)
         setupList()
         setDataObservers()
         viewModel.calculateScore()
