@@ -1,3 +1,3 @@
 package com.iav.bowling.util
 
-const val FRAMES = 10
+const val SIZE_OF_FRAMES = 10

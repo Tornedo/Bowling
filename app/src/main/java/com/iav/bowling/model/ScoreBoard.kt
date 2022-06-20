@@ -1,9 +1,7 @@
 package com.iav.bowling.model
 
 import androidx.lifecycle.MutableLiveData
-import com.iav.bowling.model.Frame.Type.SPARE
-import com.iav.bowling.model.Frame.Type.STRIKE
-import com.iav.bowling.util.FRAMES
+import com.iav.bowling.util.SIZE_OF_FRAMES
 
 /*
  This is the model class which calculate the score
@@ -26,11 +24,11 @@ data class ScoreBoard(
      */
 
     fun calculateAllScores() {
-        if (latestScoredFrameIndex == FRAMES - 1) return
+        if (latestScoredFrameIndex == SIZE_OF_FRAMES - 1) return
 
         var tempScore = 0
         var ballCount = 0
-
+        var score = 0
         val listPinsKnocked = knockedList.value!!
 
         try {
@@ -54,25 +52,17 @@ data class ScoreBoard(
                         /*
                             update score when there is a strike
                          */
-                        val score =
-                            (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
-                                ?: 0) + 10 + listPinsKnocked[index + 1] + listPinsKnocked[index + 2]
-                        framesMutableLiveData.value!![latestScoredFrameIndex] =
-                            Frame(knockedList = listOf(pins), score = score, type = STRIKE)
+                        score = calculateStrikeScore(latestScoredFrameIndex, listPinsKnocked, index)
+                        framesMutableLiveData.value!![latestScoredFrameIndex] =  createFrameWithScore(tempScore, pins, score, Frame.Type.STRIKE)
+
                         incrementFrameAndResetCounters()
                     }
                     pins + tempScore == 10 -> {
                         /*
                             update score when there is a spare
                          */
-                        val score =
-                            (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
-                                ?: 0) + 10 + listPinsKnocked[index + 1]
-                        framesMutableLiveData.value!![latestScoredFrameIndex] = Frame(
-                            knockedList = listOf(tempScore, pins),
-                            score = score,
-                            type = SPARE
-                        )
+                        score = calculateSpareScore(latestScoredFrameIndex, listPinsKnocked, index)
+                        framesMutableLiveData.value!![latestScoredFrameIndex] = createFrameWithScore(tempScore, pins, score, Frame.Type.SPARE)
                         incrementFrameAndResetCounters()
                     }
                     ballCount == 0 -> {
@@ -80,11 +70,8 @@ data class ScoreBoard(
                         ballCount++
                     }
                     else -> {
-                        val score =
-                            (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
-                                ?: 0) + tempScore + pins
-                        framesMutableLiveData.value!![latestScoredFrameIndex] =
-                            Frame(listOf(tempScore, pins), score)
+                        score = calculateNormalScore(latestScoredFrameIndex, tempScore, pins)
+                        framesMutableLiveData.value!![latestScoredFrameIndex] = createFrameWithScore(tempScore, pins, score, Frame.Type.NORMAL)
                         incrementFrameAndResetCounters()
                     }
                 }
@@ -92,5 +79,42 @@ data class ScoreBoard(
         } catch (e: Exception) {
             // TODO: Handle the exception
         }
+    }
+
+    private fun createFrameWithScore(
+        tempScore: Int,
+        pins: Int,
+        score: Int,
+        type: Frame.Type
+    ): Frame {
+        return Frame(knockedList = listOf(tempScore, pins), score = score, type = type)
+    }
+
+
+    private fun calculateStrikeScore(
+        latestScoredFrameIndex: Int,
+        listPinsKnocked: MutableList<Int>,
+        index: Int
+    ): Int {
+        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+            ?: 0) + SIZE_OF_FRAMES + listPinsKnocked[index + 1] + listPinsKnocked[index + 2]
+    }
+
+    private fun calculateSpareScore(
+        latestScoredFrameIndex: Int,
+        listPinsKnocked: MutableList<Int>,
+        index: Int
+    ): Int {
+        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+            ?: 0) + SIZE_OF_FRAMES + listPinsKnocked[index + 1]
+    }
+
+    private fun calculateNormalScore(
+        latestScoredFrameIndex: Int,
+        tempScore: Int,
+        pins: Int
+    ): Int {
+        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+            ?: 0) + tempScore + pins
     }
 }
