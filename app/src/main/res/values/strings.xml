@@ -7,5 +7,7 @@
     <string name="frame_current">Current Frame</string>
     <string name="number_of_pin_dropped">Put number of pin fall</string>
     <string name="pins_to_knock_down">Pins To Knock Down</string>
+    <string name="invalid_pin_input"> Please input a valid number of Pins! </string>
     <string name="reset">Play Again</string>
+    <string name="game_over">Game Over</string>
 </resources>

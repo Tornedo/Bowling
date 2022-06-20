@@ -70,7 +70,7 @@ class OngoingGameFragment : Fragment() {
                 "${requireContext().getText(R.string.frame_current)} : $it"
         })
         viewModel.gameOver.observe(viewLifecycleOwner, Observer {
-            if (it == true) fragmentCurrentPinsTitle.text = "Game Over"
+            if (it == true) fragmentCurrentPinsTitle.text = getString(R.string.game_over)
         })
     }
 
@@ -80,8 +80,7 @@ class OngoingGameFragment : Fragment() {
                 viewModel.doKnockDownPins(this.toInt())
                 fragmentCurrentFramePinsToKnockDownEditText.setText("")
             } else {
-                fragmentCurrentFramePinsToKnockDownInputLayout.error =
-                    "Please input a valid number of Pins!"
+                fragmentCurrentFramePinsToKnockDownInputLayout.error = getString(R.string.invalid_pin_input)
             }
         }
     }

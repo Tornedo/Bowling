@@ -29,40 +29,50 @@ data class ScoreBoard(
         var tempScore = 0
         var ballCount = 0
         var score = 0
-        val listPinsKnocked = knockedList.value!!
+        val listPinsKnocked = knockedList.value
 
         try {
-            listPinsKnocked.forEachIndexed { index, pins ->
+            listPinsKnocked?.forEachIndexed { index, pins ->
                 fun incrementFrameAndResetCounters() {
                     latestScoredFrameIndex++
                     tempScore = 0
                     ballCount = 0
                 }
                 /*
-                    return when reached to last frame
-                 */
+                                    return when reached to last frame
+                                 */
                 if (latestScoredFrameIndex > 9) return@forEachIndexed
 
                 when {
-                    framesMutableLiveData.value!![index] != null -> {
+                    framesMutableLiveData.value?.get(index) != null -> {
                         //Score for this frame has already been calculated
                         incrementFrameAndResetCounters()
                     }
                     pins == 10 -> {
                         /*
-                            update score when there is a strike
-                         */
-                        score = calculateStrikeScore(latestScoredFrameIndex, listPinsKnocked, index)
-                        framesMutableLiveData.value!![latestScoredFrameIndex] =  createFrameWithScore(tempScore, pins, score, Frame.Type.STRIKE)
+                                            update score when there is a strike
+                                         */
+                        score = listPinsKnocked?.let {
+                            calculateStrikeScore(latestScoredFrameIndex,
+                                it, index)
+                        }!!
+                        framesMutableLiveData.value?.set(latestScoredFrameIndex,
+                            createFrameWithScore(tempScore, pins, score, Frame.Type.STRIKE)
+                        )
 
                         incrementFrameAndResetCounters()
                     }
                     pins + tempScore == 10 -> {
                         /*
-                            update score when there is a spare
-                         */
-                        score = calculateSpareScore(latestScoredFrameIndex, listPinsKnocked, index)
-                        framesMutableLiveData.value!![latestScoredFrameIndex] = createFrameWithScore(tempScore, pins, score, Frame.Type.SPARE)
+                                            update score when there is a spare
+                                         */
+                        score = listPinsKnocked?.let {
+                            calculateSpareScore(latestScoredFrameIndex,
+                                it, index)
+                        }!!
+                        framesMutableLiveData.value?.set(latestScoredFrameIndex,
+                            createFrameWithScore(tempScore, pins, score, Frame.Type.SPARE)
+                        )
                         incrementFrameAndResetCounters()
                     }
                     ballCount == 0 -> {
@@ -71,7 +81,9 @@ data class ScoreBoard(
                     }
                     else -> {
                         score = calculateNormalScore(latestScoredFrameIndex, tempScore, pins)
-                        framesMutableLiveData.value!![latestScoredFrameIndex] = createFrameWithScore(tempScore, pins, score, Frame.Type.NORMAL)
+                        framesMutableLiveData.value?.set(latestScoredFrameIndex,
+                            createFrameWithScore(tempScore, pins, score, Frame.Type.NORMAL)
+                        )
                         incrementFrameAndResetCounters()
                     }
                 }
@@ -96,7 +108,7 @@ data class ScoreBoard(
         listPinsKnocked: MutableList<Int>,
         index: Int
     ): Int {
-        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+        return (framesMutableLiveData.value?.get(latestScoredFrameIndex - 1)?.score
             ?: 0) + SIZE_OF_FRAMES + listPinsKnocked[index + 1] + listPinsKnocked[index + 2]
     }
 
@@ -105,7 +117,7 @@ data class ScoreBoard(
         listPinsKnocked: MutableList<Int>,
         index: Int
     ): Int {
-        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+        return (framesMutableLiveData.value?.get(latestScoredFrameIndex - 1)?.score
             ?: 0) + SIZE_OF_FRAMES + listPinsKnocked[index + 1]
     }
 
@@ -114,7 +126,7 @@ data class ScoreBoard(
         tempScore: Int,
         pins: Int
     ): Int {
-        return (framesMutableLiveData.value!![latestScoredFrameIndex - 1]?.score
+        return (framesMutableLiveData.value?.get(latestScoredFrameIndex - 1)?.score
             ?: 0) + tempScore + pins
     }
 }

@@ -13,20 +13,20 @@ class OngoingGameViewModel : ViewModel() , KoinComponent {
     private var ballRollsInFrame = 0
     var gameOver = MutableLiveData<Boolean>()
 
-    val frames = switchMap(scorecard) { it.framesMutableLiveData }!!
-    val frameInPlay = switchMap(scorecard) { it.inPlayLiveData }!!
+    val frames = switchMap(scorecard) { it.framesMutableLiveData }
+    val frameInPlay = switchMap(scorecard) { it.inPlayLiveData }
 
     init {
         resetAll()
     }
 
     fun doKnockDownPins(numberOfPins: Int) {
-        scorecard.value!!.knockedList.value!!.add(numberOfPins)
+        scorecard.value?.knockedList?.value?.add(numberOfPins)
 
         ballRollsInFrame++
-        remainingPinsInFrame.value = remainingPinsInFrame.value!! - numberOfPins
+        remainingPinsInFrame.value = remainingPinsInFrame.value?.minus(numberOfPins)
 
-        if (scorecard.value!!.inPlayLiveData.value!! == 10 && remainingPinsInFrame.value == 0 && ballRollsInFrame < 3) {
+        if (scorecard.value?.inPlayLiveData?.value == 10 && remainingPinsInFrame.value == 0 && ballRollsInFrame < 3) {
             remainingPinsInFrame.value = 10
             return
         }
@@ -40,13 +40,14 @@ class OngoingGameViewModel : ViewModel() , KoinComponent {
     }
 
     private fun resetFrame() {
-        val currentFrameInPlay = scorecard.value!!.inPlayLiveData.value!!
-        scorecard.value!!.inPlayLiveData.value = currentFrameInPlay + 1
-        remainingPinsInFrame.value = 10
-        ballRollsInFrame = 0
-
-        if (currentFrameInPlay + 1 == 11) {
-            gameOver.value = true
+        val currentFrameInPlay = scorecard.value?.inPlayLiveData?.value
+        currentFrameInPlay?.let {
+            scorecard.value!!.inPlayLiveData.value = currentFrameInPlay + 1
+            remainingPinsInFrame.value = 10
+            ballRollsInFrame = 0
+            if (currentFrameInPlay + 1 == 11) {
+                gameOver.value = true
+            }
         }
     }
 
