@@ -17,6 +17,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layout/dialog_pin_input.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_current_frame.xml" value="0.2971014492753623" />
+        <entry key="app/src/main/res/layout/fragment_ongoing_game.xml" value="0.36614583333333334" />
+        <entry key="app/src/main/res/layout/fragment_scoreboard.xml" value="0.16058763931104356" />
         <entry key="app/src/main/res/layout/fragment_scorecard.xml" value="0.2971014492753623" />
         <entry key="app/src/main/res/layout/scorecard_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_scorecard_list_item.xml" value="0.14412360688956433" />

@@ -49,9 +49,6 @@ data class ScoreBoard(
                         incrementFrameAndResetCounters()
                     }
                     pins == 10 -> {
-                        /*
-                                            update score when there is a strike
-                                         */
                         score = listPinsKnocked?.let {
                             calculateStrikeScore(latestScoredFrameIndex,
                                 it, index)
@@ -63,9 +60,6 @@ data class ScoreBoard(
                         incrementFrameAndResetCounters()
                     }
                     pins + tempScore == 10 -> {
-                        /*
-                                            update score when there is a spare
-                                         */
                         score = listPinsKnocked?.let {
                             calculateSpareScore(latestScoredFrameIndex,
                                 it, index)
